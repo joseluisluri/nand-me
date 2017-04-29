@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <base href="<%= APP_BASE %>">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title><%= APP_TITLE %></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600">
+        <!--[if IE]><link rel="shortcut icon" href="/assets/favicon/favicon.ico"><![endif]-->
+        <link rel="shortcut icon" href="/assets/favicon/favicon-256.png">
+        <link rel="stylesheet" href="/css/nand.css?q=1">
+    </head>
+    <body>
+        <header class="container-fluid">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <a href="<%= APP_BASE %>">
+                            <img id="logo" src="<% APP_BASE %>assets/images/logo.png" alt="nand.me">
+                        </a>
+                    </div>
+                    <div class="col-md-9">
+                        <ng-navbar>
+
+                        </ng-navbar>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="container">
+            <ng-app></ng-app>
+        </div>
+        <footer class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/status">Status</a></li>
+                        <li><a href="#">Projects</a></li>
+                        <li><a href="/other">Others</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <ul>
+                        <li><a href="/about-me">About me</a></li>
+                        <li><a href="/hall-of-fame">Hall of fame</a></li>
+                        <li><a href="/contact">Contact and Bug report</a></li>
+                        <li><a href="/sitemap">Sitemap</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <ul>
+                        <li><a href="https://laravel.com">Laravel</a></li>
+                        <li><a href="http://getbootstrap.com">Bootstrap</a></li>
+                        <li><a href="http://mdbootstrap.com/">Material Design for Bootstrap</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <img src="<% APP_BASE %>assets/images/logo-white.png" alt="nand.me">
+                    <p>You can find me in social networks:</p>
+                    <div class="icons">
+                        <a href="https://www.facebook.com/jose.luis.luri"><i class="fa fa-facebook"></i></a>
+                        <a href="https://twitter.com/joseluisluri"><i class="fa fa-twitter"></i></a>
+                        <a href="http://www.linkedin.com/in/joseluisluri"><i class="fa fa-linkedin"></i></a>
+                        <a href="https://github.com/joseluisluri"><i class="fa fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                © 2017 Copyright: <a href="http://www.nand.me">nand.me</a>
+            </div>
+        </footer>
+        <script>
+            // Fixes undefined module function in SystemJS bundle
+            function module() {}
+        </script>
+
+        <!-- shims:js -->
+        <!-- endinject -->
+
+        <% if (BUILD_TYPE === 'dev') { %>
+        <script src="<%= APP_BASE %>app/system-config.js"></script>
+        <% } %>
+
+        <!-- libs:js -->
+        <!-- endinject -->
+
+        <!-- inject:js -->
+        <!-- endinject -->
+        <% if (BUILD_TYPE === 'dev') { %>
+        <script>
+            System.import('<%= BOOTSTRAP_MODULE %>')
+                .catch(function (e) {
+                    console.error(e.stack || e,
+                        'Not expecting this error? Report it at https://github.com/mgechev/angular-seed/issues');
+                });
+        </script>
+        <% } %>
+    </body>
+</html>

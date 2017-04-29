@@ -1,0 +1,33 @@
+<div class="box-header">
+    <h3 class="box-title">{{ system?.name }}</h3>
+</div>
+<div class="preservation-system box-body">
+    <div class="table-responsive">
+        <table class="table table-sm no-margin">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th class="expand">Name</th>
+                <th>Size</th>
+                <th>CRC</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor='let game of system?.games; let i = index'>
+                <td>{{ i+1 }}</td>
+                <td class="expand"><a href="#">{{ game.name }}</a></td>
+                <ng-container *ngIf='game.roms.length == 1'>
+                    <td style="white-space: nowrap;">
+                        {{ game.roms[0].size | humanfilesize }}
+                    </td>
+                    <td>
+                        {{ game.roms[0].crc | uppercase }}
+                    </td>
+                </ng-container>
+                <td><span class="badge badge-success">have</span></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

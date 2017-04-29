@@ -1,0 +1,36 @@
+<h1>Preservation <small>project</small></h1>
+<div class="row">
+    <div class="col-md-8">
+        <div class="box">
+            <ng-preservation-system [tag]="'atari-2600'">loading...</ng-preservation-system>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Systems</h3>
+            </div>
+            <div class="box-body">
+                <div class="table-responsive">
+                    <table class="table table-sm no-margin">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor='let system of systems'>
+                                <td><a (click)='loadSystem(system)' href>{{ system.name }}</a></td>
+                                <td>
+                                    <span class="badge badge-success" data-toggle="tooltip" data-placement="right" attr.title="v{{ system.version }}" *ngIf='system.updated'>Updated</span>
+                                    <span class="badge badge-danger" attr.data-toggle="tooltip" attr.data-placement="right" attr.title="v{{ system.version }}" *ngIf='!system.updated'>Outdated</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

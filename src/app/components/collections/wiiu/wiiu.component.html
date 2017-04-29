@@ -1,0 +1,54 @@
+<h1>Wiiu</h1>
+<div class="box">
+    <div class="box-header with-border">
+        <h3 class="box-title">Montly Recap Report</h3>
+    </div>
+    <div class="box-body">
+<div class="table-responsive">
+
+<table class="table no-margin">
+    <caption class="text-md-right"><em>{{ timestamp*1000 | date:'yyyy-MM-dd HH:mm:ss Z' }}</em></caption>
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Game (Update) (DLC)</th>
+        <th>Title ID</th>
+        <th>Region</th>
+        <th>Size</th>
+        <th>Type</th>
+        <th>Package</th>
+        <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor='let game of collection; let i = index;'>
+        <th scope="row">{{ i+1 }}</th>
+        <td>
+            <span>{{ game.name | titlecase }} </span>
+            <ng-container *ngFor='let update of game.update'>
+            <span class="badge badge-pill badge-warning" >
+                {{ update.version }} : {{ update.size | humanfilesize }}
+            </span>
+            </ng-container>
+            <ng-container *ngFor='let dlc of game.dlc'>
+            <span class="badge badge-pill badge-info" >
+                DLC : {{ dlc.size | humanfilesize }}
+            </span>
+            </ng-container>
+        </td>
+        <td>{{ game.id }}</td>
+        <td>EUR</td>
+        <td>{{ game.size | humanfilesize }}</td>
+        <td>{{ game.type }}</td>
+        <td>NUS Format</td>
+        <td>
+            <span class="badge badge-success" *ngIf='game.type != "Unknown"'>Updated</span>
+            <span class="badge badge-danger" *ngIf='game.type == "Unknown"'>Broken</span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</div>
+</div>
+</div>

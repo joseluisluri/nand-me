@@ -1,0 +1,16 @@
+.status .progress-bar {
+    height: 25px;
+}
+
+.status .badge {
+    width: 35px;
+}
+
+.status th {
+    min-width: 100px;
+    white-space: nowrap;
+}
+
+.status td {
+    width: 99%;
+}
