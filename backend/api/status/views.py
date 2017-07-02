@@ -1,0 +1,5 @@
+from django.http import HttpResponse
+
+
+def index(request):
+    return HttpResponse("{\"system\":{\"cpu_mhz\":\"700.0000\",\"cpu_temp\":\"56\",\"processor\":\"ARMv6-compatible processor rev 7 (v6l)\",\"distro\":\"Raspbian GNU\/Linux\",\"os\":\"GNU\/Linux\",\"cpu_usage\":\"3.3\",\"date\":\"2017-04-28 23:36:53\",\"cpus\":\"1\",\"hostname\":\"raspberrypi\",\"gpu_temp\":\"57.3\",\"kernel\":\"4.4.50+\",\"uptime\":\"5 days, 1 hour, 9 minutes\"},\"memory\":{\"mem_used\":\"371M\",\"mem_total_numeric\":\"445088\",\"mem_avail\":\"264M\",\"swap_free_numeric\":\"101100\",\"hdd_used\":\"2.2G\",\"swap_used_numeric\":\"1296\",\"hdd_used_numeric\":\"2295576\",\"hdd_avail\":\"12G\",\"swap_total_numeric\":\"102396\",\"mem_usage\":\"86\",\"mem_free_numeric\":\"64168\",\"mem_used_numeric\":\"380920\",\"hdd_avail_numeric\":\"12385856\",\"swap_usage\":\"1\",\"mem_avail_numeric\":\"270836\",\"hdd_total_numeric\":\"15330096\",\"mem_free\":\"62M\",\"hdd_total\":\"15G\",\"swap_used\":\"1.3M\",\"hdd_usage\":\"15\",\"swap_total\":\"99M\",\"mem_total\":\"434M\",\"swap_free\":\"98M\"},\"timestamp\":1493415409.3244}", content_type='application/json')
