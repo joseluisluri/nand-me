@@ -1,26 +1,38 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class ApiService {
+    private url: string;
+    private doneCallback: (response: any) => void;
+    private failCallback: (err: any) => void;
 
     constructor(private http: Http) {}
 
-    public endpoint(url: string): Observable<Array<any>> {
-        return this.http
-            .get(url)
-            .map(res => res.json())
-            .catch(this.handleError);
+    public endpoint(url: string) {
+        this.url = url;
+        return this;
     }
-
-    private handleError (error: any) {
-        let errMsg = (error.message) ? error.message :
-            error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-        console.error(errMsg); // log to console instead
-        return Observable.throw(errMsg);
+    public success(callback: (response: any) => void) {
+        this.doneCallback = callback;
+        return this;
+    }
+    public fail(callback: (err: any) => void) {
+        this.failCallback = callback;
+        return this;
+    }
+    public exec() {
+        this.http
+            .get(this.url)
+            .map(res => res.json())
+                .catch((err: any, caught: Observable<any>) => {
+                this.failCallback(err);
+                return [];
+            })
+            .subscribe(this.doneCallback);
     }
 }

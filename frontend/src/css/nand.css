@@ -109,4 +109,50 @@ body h1 > small {
 
 .breadcrumb {
     margin-top: 20px;
+    font-size: 14px;
+}
+
+/* PRIME-NG */
+.ui-sortable-column-icon {
+    cursor: pointer;
+}
+
+/* bootstrap: .page-link and .paginator */
+.ui-paginator {
+    padding: 5px;
+}
+ /*
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    border-radius: .25rem;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+}*/
+/*
+.ui-paginator-first,
+.ui-paginator-prev,
+.ui-paginator-next,
+.ui-paginator-last {
+    position: relative;
+    padding: 10px;
+    margin-left: -1px;
+    line-height: 12px;
+    color: #0275d8;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}*/
+
+.ui-ppshinsyot-pages {
+    padding: 0;
+    margin: 0;
+}
+
+.ui-paginator-element {
+    padding: 10px;
+    line-height: 18px;
+    height: 18px;
+    color: #0275d8;
+    background-color: #fff;
+    border: 1px solid #ddd;
 }

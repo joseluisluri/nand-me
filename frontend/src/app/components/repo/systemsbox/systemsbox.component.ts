@@ -1,6 +1,7 @@
-import { Component, OnInit, } from '@angular/core';
-import { ApiService } from '../../shared/services/api.service';
-import { AppSettings } from '../../../appsettings';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {ApiService} from '../../shared/services/api.service';
+import {DataTable, LazyLoadEvent} from 'primeng/primeng';
+import {Title} from '@angular/platform-browser';
 
 @Component({
     moduleId: module.id,
@@ -9,16 +10,57 @@ import { AppSettings } from '../../../appsettings';
 })
 
 export class SystemsBoxComponent implements OnInit {
-    endpoint = AppSettings.API_ENDPOINT + '/repo/systems';
-    systems: any[];
+    title: string = "Played Games History";
+    endpoint: string = 'http://localhost:8080/repo/systems';
 
-    constructor(public api: ApiService) {}
+    @ViewChild('dataTable') dataTable: DataTable;
+    systems: any[] = null;
+    loading: boolean = true;
+
+    count: number = 0;
+    page: number = 1;
+    per_page: number = 15;
+    order: string = 'asc';
+    order_by: string = 'name';
+    message : any[] = [];
+
+    constructor(public api: ApiService, private titleService: Title) {}
 
     public ngOnInit() {
+        this.loadData(this.per_page, this.page, this.order, this.order_by);
+        this.dataTable.sortOrder = -1; // 1 for asc and -1 for desc
+        this.dataTable.sortField = this.order_by;
+    }
+
+    public onLazyLoad(event: LazyLoadEvent) {
+        if (this.systems) {
+            let page = (event.first / event.rows + 1);
+            let per_page = event.rows;
+            let order = event.sortOrder == -1 ? 'desc' : 'asc'; // 1 for asc and -1 for desc
+            let order_by = event.sortField || this.order_by;
+            this.loadData(per_page, page, order, order_by);
+        }
+    }
+
+    ngAfterViewInit(): void {
+        this.titleService.setTitle(this.title);
+    }
+
+    private loadData(per_page: number, page: number, order: string, order_by: string) {
+        let query: string = this.endpoint;
+        // let query: string = this.endpoint + '?per_page=' + per_page + '&page=' + page + '&order=' + order + '&order_by=' + order_by;
+        this.loading = true;
+        console.log(query);
         this.api
-            .endpoint(this.endpoint)
-            .subscribe((response: any) => {
-                this.systems = response;
-            });
+            .endpoint(query)
+            .success((response: any) => {
+                this.loading = false;
+                this.systems = response.records;
+                this.count = response.count;
+                console.log(this.systems)
+            }).fail((error: any) => {
+                this.loading = false;
+                this.message.push({severity:'info', summary:'Info Message', detail:'PrimeNG rocks'});
+        }).exec();
     }
 }

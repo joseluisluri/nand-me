@@ -10,19 +10,24 @@ import { AppSettings } from '../../appsettings';
 })
 
 export class StatusComponent implements OnInit {
-    endpoint = AppSettings.API_ENDPOINT + '/status/';
+    endpoint = AppSettings.API_BASE + '/status/';
     system: any[];
     memory: any[];
 
     constructor(public api: ApiService) {}
 
     public ngOnInit() {
-        this.api
-            .endpoint(this.endpoint)
-            .subscribe((response: any) => {
-                this.system = response.system;
-                this.memory = response.memory;
-            });
-
+        let refresh = () => {
+            this.api
+                .endpoint(this.endpoint)
+                .success((response: any) => {
+                    this.system = response.system;
+                    this.memory = response.memory;
+                }).fail((error: any) => {
+                    console.log('FAIL!' + error);
+                }).exec();
+        };
+        refresh();
+        setInterval(refresh, 5000);
     }
 }

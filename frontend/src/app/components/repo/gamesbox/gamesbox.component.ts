@@ -11,7 +11,7 @@ import { AppSettings } from '../../../appsettings';
 
 export class GamesBoxComponent implements OnInit {
     @Input() tag: string;
-    endpoint = AppSettings.API_ENDPOINT + '/v1/preservation/system/';
+    endpoint = AppSettings.API_BASE + '/v1/preservation/system/';
     system: any[];
     onBindListener: any[] = [];
     rows: number = 50;
@@ -25,12 +25,12 @@ export class GamesBoxComponent implements OnInit {
 
     public bind() {
         if (this.tag != null) {
-            this.api
+            /*this.api
                 .endpoint(this.endpoint + this.tag)
                 .subscribe((response: any) => {
                     this.system = response;
                     this.onBindListener.forEach((c) => c());
-            });
+            });*/
         }
     }
 
